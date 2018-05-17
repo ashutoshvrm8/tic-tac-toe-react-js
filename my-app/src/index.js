@@ -35,10 +35,13 @@ class Square extends React.Component {
       Note that DOM <button> element’s onClick attribute has a special meaning to React, 
       but we could have named Square’s onClick prop or Board’s handleClick method differently. 
       It is, however, conventional in React apps to use on* names for the attributes and handle* for the handler methods.
+
+      Square no longer keeps its own state; it receives its value from its parent Board and informs its parent when it’s clicked. 
+      We call components like this controlled components.
     */
 
     handleClick(i) {
-      const squares = this.state.squares.slice();
+      const squares = this.state.squares.slice(); // call .slice() to copy the squares array instead of mutating the existing array.
       squares[i] = 'X';
       this.setState({squares: squares});
     }
