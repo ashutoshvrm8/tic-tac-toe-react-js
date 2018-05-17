@@ -2,13 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 
-class Square extends React.Component {
-    /*
-      1) In JavaScript classes, you need to explicitly call super(); when defining the constructor of a subclass.
-      2) Adding a constructor to the class to initialize the state.
-      3) Using this.state to add state to a component.
-    */
-
+  /*
+  class Square extends React.Component {
     render() {
       return (
         <button className="square" onClick = {() => this.props.onClick()}>
@@ -16,6 +11,22 @@ class Square extends React.Component {
         </button>
       );
     }
+  }
+  */
+
+  /*
+    Rather than define a class extending React.Component, 
+    simply write a function that takes props and returns what should be rendered.
+  */
+
+  // Functional Component
+  
+  function Square(props) {
+    return (
+      <button className="square" onClick={props.onClick}>
+        {props.value}
+      </button>
+    );
   }
   
   class Board extends React.Component {
