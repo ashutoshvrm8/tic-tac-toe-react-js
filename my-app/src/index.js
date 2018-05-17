@@ -26,8 +26,7 @@ class Square extends React.Component {
   
   class Board extends React.Component {
     /*
-      Pulling state upwards like this is common when refactoring React components, 
-      so let’s take this opportunity to try it out. 
+      Pulling state upwards during refactoring React components to monitor child components' state keep them in sync.
       Add a constructor to the Board and set its initial state to contain an array with 9 nulls, 
       corresponding to the 9 squares.
     */
