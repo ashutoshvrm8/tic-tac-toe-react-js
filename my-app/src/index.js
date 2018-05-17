@@ -8,17 +8,11 @@ class Square extends React.Component {
       2) Adding a constructor to the class to initialize the state.
       3) Using this.state to add state to a component.
     */
-    constructor(props) {
-      super(props);
-      this.state = {
-        value: null,
-      };
-    }
 
     render() {
       return (
-        <button className="square" onClick = {() => this.setState({value: 'X'})}>
-          {this.state.value}
+        <button className="square" onClick = {() => this.props.onClick()}>
+          {this.props.value}
         </button>
       );
     }
@@ -37,12 +31,30 @@ class Square extends React.Component {
       };
     }
 
-    // Modify Board’s renderSquare method to pass a value prop to Square.
+    /*
+      Note that DOM <button> element’s onClick attribute has a special meaning to React, 
+      but we could have named Square’s onClick prop or Board’s handleClick method differently. 
+      It is, however, conventional in React apps to use on* names for the attributes and handle* for the handler methods.
+    */
+
+    handleClick(i) {
+      const squares = this.state.squares.slice();
+      squares[i] = 'X';
+      this.setState({squares: squares});
+    }
+    
+    /*
+      Now we need to change what happens when a square is clicked. 
+      The Board component now stores which squares are filled, 
+      which means we need some way for Square to update the state of Board. 
+      Since component state is considered private, we can’t update Board’s state directly from Square.
+      The usual pattern here is pass down a function from Board to Square that gets called when the square is clicked. 
+    */
 
     renderSquare(i) {
       return (
         <Square
-          value = {this.state.squares[i]}
+          value = {this.state.squares[i]} // Modify Board’s renderSquare method to pass a value prop to Square.
           onClick = {() => this.handleClick(i)}
         />
       );
