@@ -20,9 +20,10 @@ import './index.css';
   */
 
   // Functional Component
-  
+
   function Square(props) {
     return (
+      // onClick={props.onClick()} would not work because it would call props.onClick immediately instead of passing it down
       <button className="square" onClick={props.onClick}>
         {props.value}
       </button>
@@ -39,6 +40,7 @@ import './index.css';
       super(props);
       this.state = {
         squares: Array(9).fill(null),
+        xIsNext: true,
       };
     }
 
@@ -53,8 +55,11 @@ import './index.css';
 
     handleClick(i) {
       const squares = this.state.squares.slice(); // call .slice() to copy the squares array instead of mutating the existing array.
-      squares[i] = 'X';
-      this.setState({squares: squares});
+      squares[i] = this.state.xIsNext ? 'X' : 'O';
+      this.setState({
+        squares: squares,
+        xIsNext: !this.state.xIsNext,
+      });
     }
     
     /*
@@ -75,7 +80,7 @@ import './index.css';
     }
   
     render() {
-      const status = 'Next player: X';
+      const status = 'Next player: ' + (this.state.xIsNext ? 'X' : 'O');
   
       return (
         <div>
